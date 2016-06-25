@@ -47,13 +47,10 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         String[] songs = new String[]{"Hello", "Take Me out", "take a walk"};
 
 
-        QueueItem[] items = new QueueItem[5];
-        for (int i = 0; i < items.length; i++) {
-            items[i] = new QueueItem("0", 0);
-        }
+        //QueueItem[] items =
 //
         ListView lView = (ListView) view.findViewById(R.id.viewGroupList);
-        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
+        //_adapter = new ViewGroupCustomAdapter(view.getContext(), items);
         
 
 //        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
