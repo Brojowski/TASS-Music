@@ -23,5 +23,6 @@
         android:hint="Spotify URI"
         android:textColor="#fff"
         android:textColorHint="#30CD9A"
+        android:maxLines="1"
         />
 </LinearLayout>

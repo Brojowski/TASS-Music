@@ -59,8 +59,9 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
         if (success) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragViewGroup.IsCreator = isCreator;
             FragViewGroup fvg = new FragViewGroup();
-            fvg.IsCreator = isCreator;
+            //fvg.IsCreator = isCreator;
             fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
             fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
             fragmentTransaction.commit();

@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class FragViewGroup extends Fragment implements TassService.SongListCallback {
 
     private ViewGroupCustomAdapter _adapter;
-    public boolean IsCreator = false;
+    public static boolean IsCreator = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,9 +75,16 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
 
                 LayoutInflater linf = LayoutInflater.from(view.getContext());
                 final View inflator = linf.inflate(R.layout.dialog_add_song, null);
+                String Message = "Are you sure you want to quit?";
+                String Title = "Leave Party";
+                if(IsCreator)
+                {
+                    Title = "Destroy Group";
+                    Message = "Leaving the group will disband the party and kick everyone out. \r\n Are you sure you want to quit?";
 
-                
-                builder.setMessage("Are you sure you want to quit?").setTitle("Leave Party");
+                }
+
+                builder.setMessage(Message).setTitle(Title);
                 builder.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog f = (Dialog) dialog;
