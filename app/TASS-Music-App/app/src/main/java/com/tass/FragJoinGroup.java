@@ -23,6 +23,7 @@ public class FragJoinGroup extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+<<<<<<< HEAD
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.page_join_group, container, false);
         inflatedView = inflater.inflate(R.layout.page_join_group, container, false);
@@ -45,6 +46,9 @@ public class FragJoinGroup extends Fragment {
             }
         });
         return inflatedView;
+=======
+        return  inflater.inflate(R.layout.page_join_group, container, false);
+>>>>>>> origin/master
     }
 
     public boolean sendRequest(String playListName, String password){
@@ -53,10 +57,26 @@ public class FragJoinGroup extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // This event is triggered soon after onCreateView().
-        // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
+        Button join_button = (Button) view.findViewById(R.id.join_button);
+        join_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText playlistTextField= (EditText) view.findViewById(R.id.playlistNameTextField);
+                EditText pinTextField = (EditText) view.findViewById(R.id.passwordTextField);
+
+                String playListName= playlistTextField.getText().toString();
+                String password= pinTextField.getText().toString();
+                Log.v("Does this shit work", playListName+" "+password);
+                if(sendRequest(playListName,password)){
+                    Log.v("Does this shit work", "i love ice cream");
+                }else{
+                    playlistTextField.setText("");
+                    pinTextField.setText("");
+                }
+            }
+        });
     }
 }
 
