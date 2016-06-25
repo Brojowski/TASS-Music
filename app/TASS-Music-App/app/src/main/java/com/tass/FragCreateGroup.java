@@ -16,6 +16,7 @@ import com.example.alex.tass_music_app.R;
  */
 public class FragCreateGroup extends Fragment {
 
+    EditText txtGroupName = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -29,7 +30,7 @@ public class FragCreateGroup extends Fragment {
         btnGroupConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText txtGroupName = (EditText) view.findViewById(R.id.create_group_name);
+                txtGroupName = (EditText) view.findViewById(R.id.create_group_name);
                 String groupName = txtGroupName.getText().toString();
 
                 try {
