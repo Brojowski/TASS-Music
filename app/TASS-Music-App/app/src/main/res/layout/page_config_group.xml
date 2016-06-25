@@ -2,30 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerVertical="true"
+    android:layout_centerVertical="false"
     android:layout_centerHorizontal="true"
-    android:gravity="center_vertical|center_horizontal|center"
+    android:gravity="center_horizontal"
     android:background="#303032">
+
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="1">
+            android:weightSum="1"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/ic_music"
-                    android:layout_gravity="center" />
+                    android:layout_width="275dp"
+                    android:layout_height="275dp"
+
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/ic_main"
+                    android:layout_gravity="center"
+                    android:id="@+id/imageView2"
+
+                    />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="50dp"
+
+                    >
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:textColor="#30CD9A"
                             android:text="Group Name:"
-                            android:paddingBottom="4dp"
+
+                            android:textSize="18dp"
                             />
 
                         <EditText
@@ -34,28 +49,38 @@
                             android:gravity="center"
                             android:textColor="#fff"
                             android:ems="10"
+                            android:textSize="28dp"
+                            android:isScrollContainer="false"
                             android:id="@+id/create_group_name" />
                 </LinearLayout>
 
+                <LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    >
 
         <Button
-            android:layout_marginTop="45dp"
+
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="60dp"
             android:text="Create"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:id="@+id/create_button"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_horizontal|clip_vertical"
             android:layout_weight="0.32"
             android:background="#30CD9A"
             android:textColor="#eee"
+            android:layout_margin="2dp"
             />
+
         <Button
-            android:layout_marginTop="45dp"
+
+            android:layout_margin="2sp"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:text="Create"
+            android:layout_height="60dp"
+            android:text="Join"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:id="@+id/join_button"
@@ -64,6 +89,8 @@
             android:background="#30CD9A"
             android:textColor="#eee"
             />
+
+</LinearLayout>
 
         </LinearLayout>
 </RelativeLayout>
