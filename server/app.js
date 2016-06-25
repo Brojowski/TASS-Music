@@ -70,5 +70,10 @@ app.get("/close/:groupid",function (req,res) {
     })
 });
 
+app.delete("/group/:groupid/remove/:songid",function (req, res) {
+    db.removeSong(req.params.groupid,req.params.songid);
+    res.send("").status(200);
+});
+
 app.listen(8080);
 

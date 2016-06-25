@@ -28,12 +28,13 @@ public class TassService
     private static String _url;
     private static Context context;
     private static RequestQueue _queue;
+    public static String GroupName;
 
     private String _guid = null;
 
     private static TassService instance;
     public static TassService Instance(Context c)
-    { 
+    {
         context = c;
         _queue = Volley.newRequestQueue(context);
         if(instance == null)
@@ -63,6 +64,7 @@ public class TassService
 
     private void authCall(String groupName, String path,final GroupCallback cb, int method)
     {
+        GroupName = groupName;
         StringBuilder sb = new StringBuilder();
         sb.append(_url);
         sb.append(path);
@@ -122,13 +124,35 @@ public class TassService
         _queue.add(sr);
     }
 
-    public void getNext(SongListCallback callback)
+    public void getList(SongListCallback callback)
     {
         if (_guid == null)
         {
             // not connected to a group
             Log.e("Service::", "NO GUID BEFORE TRYING TO ACCESS");
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(_url);
+        sb.append("group/");
+        sb.append(_guid);
+        sb.append("/next");
+        StringRequest sr = new StringRequest(
+                Request.Method.GET,
+                sb.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        _queue.add(sr);
     }
 
     private Group parseGroup(JSONObject response)

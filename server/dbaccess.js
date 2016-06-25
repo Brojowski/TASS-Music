@@ -110,5 +110,8 @@ module.exports =
             }
             callback({songs:rows});
         });
+    },
+    removeSong: function (guid, uri) {
+        connection.query("DELETE FROM songs WHERE groupguid=? AND uri=?",[guid,uri]);
     }
 };
