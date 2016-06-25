@@ -49,7 +49,7 @@ public class TassService
 
     private TassService()
     {
-        _url = "http://10.70.10.32:8080/";
+        _url = "http://10.70.6.125:8080/";
 
     }
 
