@@ -32,6 +32,7 @@ app.get("/join/:name",function (req,res) {
 
 app.post("/group/:groupid/add/:songid",function(req,res)
 {
+    console.log("Add/Vote song.");
     db.add(req.params.groupid,req.params.songid,function (info) {
         if (info.err)
         {

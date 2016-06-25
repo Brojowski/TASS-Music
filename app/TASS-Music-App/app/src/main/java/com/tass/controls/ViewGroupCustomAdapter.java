@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.tass_music_app.R;
+import com.tass.services.TassService;
 
 /**
  * Created by Sean on 6/25/2016.
@@ -41,6 +42,7 @@ public class ViewGroupCustomAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View view) {
                 //todo make call to server to upvote song.
+                //TassService.Instance(context).addOrVoteSong();
             }
         });
         return rowView;
