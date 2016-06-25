@@ -32,12 +32,29 @@ app.get("/join/:name",function (req,res) {
 
 app.post("/group/:groupid/add/:songid",function(req,res)
 {
-    res.send("200:"+req.params.groupid+":"+req.params.songid);
+    db.add(req.params.groupid,req.params.songid,function (info) {
+        if (info.err)
+        {
+            res.send(info.err).status(501);
+        }else
+        {
+            res.send("").status(200);
+        }
+    });
 });
 
 app.get("/group/:groupid/next",function(req,res)
 {
-    res.send("200:"+req.params.groupid);
+    db.getNext(req.params.groupid,function (info) {
+       if (info.err)
+       {
+           res.send(info.err).status(501);
+       }
+       else
+       {
+            res.send(info.songs).status(200);
+       }
+    });
 });
 
 app.get("/close/:groupid",function (req,res) {
