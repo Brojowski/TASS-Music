@@ -1,5 +1,7 @@
-package com.tass;
+package com.tass.Services;
 
+
+import com.tass.QueueItem;
 
 import java.util.ArrayList;
 
