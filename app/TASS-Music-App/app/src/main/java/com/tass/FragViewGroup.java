@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +71,10 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
             // ask the user for th spotify uid
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                ContextThemeWrapper c = new ContextThemeWrapper(view.getContext(), R.style.darkDialog);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(c);
 
                 LayoutInflater linf = LayoutInflater.from(view.getContext());
                 final View inflator = linf.inflate(R.layout.dialog_add_song, null);
