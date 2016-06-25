@@ -51,6 +51,19 @@
             android:background="#30CD9A"
             android:textColor="#eee"
             />
+        <Button
+            android:layout_marginTop="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="Create"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:id="@+id/join_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.32"
+            android:background="#30CD9A"
+            android:textColor="#eee"
+            />
 
         </LinearLayout>
 </RelativeLayout>

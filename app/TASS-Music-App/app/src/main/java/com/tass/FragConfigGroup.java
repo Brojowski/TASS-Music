@@ -26,17 +26,17 @@ public class FragConfigGroup extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
-        Button btnGroupConnect = (Button) view.findViewById(R.id.create_button);
         txtGroupName = (EditText) view.findViewById(R.id.create_group_name);
-        btnGroupConnect.setOnClickListener(new View.OnClickListener() {
+
+        Button btnCreate = (Button) view.findViewById(R.id.create_button);
+        btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String groupName = txtGroupName.getText().toString();
 
                 try {
                     // TODO: Pass group name to services
-
+                    // create the shit
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
@@ -48,7 +48,25 @@ public class FragConfigGroup extends Fragment {
             }
         });
 
+        Button btnJoin = (Button) view.findViewById(R.id.join_button);
+        btnJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String groupName = txtGroupName.getText().toString();
 
+                try {
+                    // TODO: Pass group name to services
+                    // join the shit
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
+                    fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+                    fragmentTransaction.commit();
+                } catch (Exception ex) {
+                    // TODO: HANDLE ME (unique group name?)
+                }
+            }
+        });
     }
 }
 
