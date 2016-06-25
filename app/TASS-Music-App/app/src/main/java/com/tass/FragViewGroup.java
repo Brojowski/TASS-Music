@@ -6,6 +6,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +29,7 @@ import java.util.ArrayList;
  * Created by Sean on 6/25/2016.
  */
 public class FragViewGroup extends Fragment implements TassService.SongListCallback {
-
-    public boolean IsCreator = false;
+    public static boolean IsCreator = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,18 +41,66 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         TassService.Instance(getContext()).getList(this);
+        FloatingActionButton btnQuit = (FloatingActionButton) view.findViewById(R.id.btn_quit);
+        btnQuit.setOnClickListener(new View.OnClickListener() {
+            // ask the user for th spotify uid
+            @Override
+            public void onClick(View view) {
 
-        if (IsCreator) {
-            // enable the close button
-            // hook up the close button event
-        }
+                ContextThemeWrapper c = new ContextThemeWrapper(view.getContext(), R.style.darkDialog);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(c);
+
+                LayoutInflater linf = LayoutInflater.from(view.getContext());
+                final View inflator = linf.inflate(R.layout.dialog_add_song, null);
+                String Message = "Are you sure you want to quit?";
+                String Title = "Leave Party";
+                if(IsCreator)
+                {
+                    Title = "Destroy Group";
+                    Message = "Leaving the group will disband the party and kick everyone out. \r\n Are you sure you want to quit?";
+
+                }
+
+                builder.setMessage(Message).setTitle(Title);
+                builder.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Dialog f = (Dialog) dialog;
+
+                        if (IsCreator) {
+                            // If the group creator is leaving the fragment then we want the group to close
+                            TassService.Instance(getContext()).closeGroup();
+                            IsCreator = false;
+                        }
+                        dialog.cancel();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        FragConfigGroup fcg = new FragConfigGroup();
+
+                        fragmentTransaction.replace(R.id.app_content, new FragConfigGroup());
+                        fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+                        fragmentTransaction.commit();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         FloatingActionButton btnAddSong = (FloatingActionButton) view.findViewById(R.id.btn_add_song);
         btnAddSong.setOnClickListener(new View.OnClickListener() {
             // ask the user for th spotify uid
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                ContextThemeWrapper c = new ContextThemeWrapper(view.getContext(), R.style.darkDialog);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(c);
 
                 LayoutInflater linf = LayoutInflater.from(view.getContext());
                 final View inflator = linf.inflate(R.layout.dialog_add_song, null);
@@ -62,7 +113,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                         //This is the input I can't get text from
                         EditText editText = (EditText) f.findViewById(R.id.spotify_uri);
                         String spotifyUri = editText.getText().toString();
-                        //TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
+                        TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
                         TassService.Instance(getContext()).getList(FragViewGroup.this);
                         dialog.cancel();
                     }
@@ -104,6 +155,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         if (IsCreator) {
             // If the group creator is leaving the fragment then we want the group to close
             TassService.Instance(getContext()).closeGroup();
+            IsCreator = false;
         }
     }
 }
