@@ -4,7 +4,7 @@ package com.tass.services;
 public class QueueItem
 {
     private String title;
-    private String Artist;
+    private String _artist;
     private String _uri;
     private int _votes;
 
@@ -16,14 +16,12 @@ public class QueueItem
 
     public String getTitle()
     {
-//        return title;
-        return "title";
+        return title;
     }
 
     public String getAuthor()
     {
-     return "autjpr";
-//     return Artist;
+         return _artist;
     }
 
     private void getTrackInfo()

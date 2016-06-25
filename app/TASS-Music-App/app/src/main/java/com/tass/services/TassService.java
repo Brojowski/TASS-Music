@@ -158,8 +158,6 @@ public class TassService
                 }
         );
         _queue.add(sr);
-        callback.onSuccess(new Group());
-
     }
 
     private Group parseGroup(String response)
