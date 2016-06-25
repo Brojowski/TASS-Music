@@ -6,7 +6,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-    <style name="dialogAlertTheme" parent="@android:style/Theme.Dialog.Alert">
+    <style name="dialogAlertTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
 
         <item name="android:windowContentOverlay">@null</item>
