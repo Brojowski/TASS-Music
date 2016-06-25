@@ -9,14 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.alex.tass_music_app.R;
-import com.tass.controls.ViewGroupCustomAdapter;
+import com.tass.controls.ListAdapter;
 import com.tass.services.Group;
 import com.tass.services.QueueItem;
 import com.tass.services.TassService;
@@ -28,7 +26,6 @@ import java.util.ArrayList;
  */
 public class FragViewGroup extends Fragment implements TassService.SongListCallback {
 
-    private ViewGroupCustomAdapter _adapter;
     public boolean IsCreator = false;
 
     @Override
@@ -39,25 +36,8 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // This event is triggered soon after onCreateView().
-        // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
 
-        String[] songs = new String[]{"Hello", "Take Me out", "take a walk"};
-
-
-        QueueItem[] items = new QueueItem[5];
-        for (int i = 0; i < items.length; i++) {
-            items[i] = new QueueItem("0", 0);
-        }
-//
-        ListView lView = (ListView) view.findViewById(R.id.viewGroupList);
-        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
-        
-
-//        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
-        lView.setAdapter(_adapter);
+        TassService.Instance(getContext()).getList(this);
 
         if (IsCreator) {
             // enable the close button
@@ -101,13 +81,21 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     @Override
     public void onSuccess(Group group)
     {
+        ArrayList<QueueItem> songQueue = group.getSongQueue();
+        ArrayList<String> displayArray = new ArrayList<String>();
+        for (int i = 0; i < songQueue.size(); i++) {
+            displayArray.add(songQueue.get(i).getTitle() + ";" + songQueue.get(i).getAuthor());
+        }
+        ListView yourListView = (ListView) getView().findViewById(R.id.viewGroupList);
+        ListAdapter customAdapter = new ListAdapter(yourListView.getContext(), R.layout.view_adapter_layout, displayArray);
+        yourListView.setAdapter(customAdapter);
     }
 
     @Override
     public void onError()
     {
         //TODO: Need to do something better.
-        Toast.makeText(getContext(),"Could not load the songs from the group.", Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),"Could not load the songsfor this group", Toast.LENGTH_SHORT);
     }
 
     @Override

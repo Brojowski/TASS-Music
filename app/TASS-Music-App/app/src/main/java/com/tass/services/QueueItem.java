@@ -16,12 +16,14 @@ public class QueueItem
 
     public String getTitle()
     {
-        return title;
+//        return title;
+        return "title";
     }
 
     public String getAuthor()
     {
-        return Artist;
+     return "autjpr";
+//     return Artist;
     }
 
     private void getTrackInfo()
