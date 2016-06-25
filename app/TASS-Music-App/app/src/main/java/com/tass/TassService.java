@@ -1,4 +1,4 @@
-package com.example.alex.tass_music_app;
+package com.tass;
 
 import android.content.Context;
 import com.android.volley.Response;
@@ -8,7 +8,7 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by alex on 6/24/16.
  */
-public class TASS_Service
+public class TassService
 {
     public enum Paths
     {

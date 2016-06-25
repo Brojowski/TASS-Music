@@ -2,8 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="page join"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/playlistNameTextField" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwordTextField" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join"
+        android:id="@+id/join_button"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>
