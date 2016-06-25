@@ -11,8 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name="com.tass.TassService" />
-
         <activity
             android:name="com.tass.NavActivity"
             android:label="@string/title_activity_nav"
