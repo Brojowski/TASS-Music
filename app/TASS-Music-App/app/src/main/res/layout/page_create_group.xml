@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"
-    android:gravity="center_vertical|center_horizontal|center">
+    android:gravity="center_vertical|center_horizontal|center"
+    android:background="#303032">
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -22,12 +23,16 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Group Name:"/>
+                            android:textColor="#30CD9A"
+                            android:text="Group Name:"
+                            android:paddingBottom="4dp"
+                            />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textColor="#fff"
                             android:ems="10"
                             android:id="@+id/create_group_name" />
                 </LinearLayout>
@@ -38,9 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:text="Create"
+            android:textAllCaps="true"
+            android:textStyle="bold"
             android:id="@+id/create_button"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.32" />
+            android:layout_weight="0.32"
+            android:background="#30CD9A"
+            android:textColor="#eee"
+            />
 
         </LinearLayout>
 </RelativeLayout>

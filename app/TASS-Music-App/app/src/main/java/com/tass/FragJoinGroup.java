@@ -21,7 +21,7 @@ public class FragJoinGroup extends Fragment {
         return  inflater.inflate(R.layout.page_join_group, container, false);
     }
 
-    public boolean sendRequest(String playListName, String password){
+    public boolean sendRequest(String groupName){
         return false;
     }
 
@@ -33,17 +33,16 @@ public class FragJoinGroup extends Fragment {
             @Override
             public void onClick(View view) {
 
-                EditText playlistTextField= (EditText) view.findViewById(R.id.playlistNameTextField);
-                EditText pinTextField = (EditText) view.findViewById(R.id.passwordTextField);
+                EditText group = (EditText) view.findViewById(R.id.group_name);
 
-                String playListName= playlistTextField.getText().toString();
-                String password= pinTextField.getText().toString();
-                Log.v("Does this shit work", playListName+" "+password);
-                if(sendRequest(playListName,password)){
+
+                String Group = group.getText().toString();
+
+                if(sendRequest(Group)){
                     Log.v("Does this shit work", "i love ice cream");
                 }else{
-                    playlistTextField.setText("");
-                    pinTextField.setText("");
+                    group.setText("");
+
                 }
             }
         });
