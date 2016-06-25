@@ -2,6 +2,7 @@ package com.tass.services;
 
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -18,4 +19,6 @@ public class Group {
     {
         _queue.add(qi);
     }
+
+    public ArrayList<QueueItem> getSongQueue() { return _queue; }
 }

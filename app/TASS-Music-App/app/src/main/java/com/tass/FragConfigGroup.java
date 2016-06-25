@@ -58,18 +58,14 @@ public class FragConfigGroup extends Fragment{
             }
         });
 
-
     }
-<<<<<<< HEAD
 
-    @Override
     public void sessionCallback(boolean success, boolean isCreator) {
         if (success) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             FragViewGroup.IsCreator = isCreator;
             FragViewGroup fvg = new FragViewGroup();
-            //fvg.IsCreator = isCreator;
             fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
             fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
             fragmentTransaction.commit();
@@ -78,7 +74,5 @@ public class FragConfigGroup extends Fragment{
         }
     }
 
-=======
->>>>>>> origin/master
 }
 

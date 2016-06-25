@@ -13,14 +13,12 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.alex.tass_music_app.R;
-import com.tass.controls.ViewGroupCustomAdapter;
+import com.tass.controls.ListAdapter;
 import com.tass.services.Group;
 import com.tass.services.QueueItem;
 import com.tass.services.TassService;
@@ -31,8 +29,6 @@ import java.util.ArrayList;
  * Created by Sean on 6/25/2016.
  */
 public class FragViewGroup extends Fragment implements TassService.SongListCallback {
-
-    private ViewGroupCustomAdapter _adapter;
     public static boolean IsCreator = false;
 
     @Override
@@ -43,23 +39,8 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // This event is triggered soon after onCreateView().
-        // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
 
-        String[] songs = new String[]{"Hello", "Take Me out", "take a walk", "Take Me out", "take a walk"};
-
-
-        //QueueItem[] items =
-//
-        ListView lView = (ListView) view.findViewById(R.id.viewGroupList);
-        //s_adapter = new ViewGroupCustomAdapter(view.getContext(), items);
-
-
-//        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
-        lView.setAdapter(_adapter);
-
+        TassService.Instance(getContext()).getList(this);
         FloatingActionButton btnQuit = (FloatingActionButton) view.findViewById(R.id.btn_quit);
         btnQuit.setOnClickListener(new View.OnClickListener() {
             // ask the user for th spotify uid
@@ -89,6 +70,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                         if (IsCreator) {
                             // If the group creator is leaving the fragment then we want the group to close
                             TassService.Instance(getContext()).closeGroup();
+                            IsCreator = false;
                         }
                         dialog.cancel();
                         FragmentManager fragmentManager = getFragmentManager();
@@ -131,7 +113,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                         //This is the input I can't get text from
                         EditText editText = (EditText) f.findViewById(R.id.spotify_uri);
                         String spotifyUri = editText.getText().toString();
-                        //TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
+                        TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
                         TassService.Instance(getContext()).getList(FragViewGroup.this);
                         dialog.cancel();
                     }
@@ -150,13 +132,21 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     @Override
     public void onSuccess(Group group)
     {
+        ArrayList<QueueItem> songQueue = group.getSongQueue();
+        ArrayList<String> displayArray = new ArrayList<String>();
+        for (int i = 0; i < songQueue.size(); i++) {
+            displayArray.add(songQueue.get(i).getTitle() + ";" + songQueue.get(i).getAuthor());
+        }
+        ListView yourListView = (ListView) getView().findViewById(R.id.viewGroupList);
+        ListAdapter customAdapter = new ListAdapter(yourListView.getContext(), R.layout.view_adapter_layout, displayArray);
+        yourListView.setAdapter(customAdapter);
     }
 
     @Override
     public void onError()
     {
         //TODO: Need to do something better.
-        Toast.makeText(getContext(),"Could not load the songs from the group.", Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),"Could not load the songsfor this group", Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -165,6 +155,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         if (IsCreator) {
             // If the group creator is leaving the fragment then we want the group to close
             TassService.Instance(getContext()).closeGroup();
+            IsCreator = false;
         }
     }
 }
