@@ -16,12 +16,12 @@ public class QueueItem
 
     public String getTitle()
     {
-        return title;
+        return _uri;
     }
 
     public String getAuthor()
     {
-         return _artist;
+         return "STR_TASS_AUTHOR_NAME";
     }
 
     private void getTrackInfo()
