@@ -6,4 +6,50 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+    <style name="dialogAlertTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@style/darkDialogTitle</item>
+        <item name="android:background">#333</item>
+        <item name="android:actionMenuTextColor">#fff</item>
+
+        <item name="android:borderlessButtonStyle">@style/buttonStyle</item>
+    </style>
+    <style name="darkDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@style/darkDialogTitle</item>
+        <item name="android:background">#333</item>
+        <item name="android:actionMenuTextColor">#fff</item>
+
+        <item name="android:borderlessButtonStyle">@style/buttonStyle</item>
+    </style>
+
+    <style name="darkDialogTitle" parent="android:Widget.TextView">
+        <item name="android:background">#333</item>
+        <item name="android:windowFrame">@style/windowFrame</item>
+        <item name="android:actionMenuTextColor">#fff</item>
+
+        <item name="android:padding">10dp</item>
+    </style>
+<style name="buttonStyle">
+    <item name="android:background">#30CD9A</item>
+    <item name="android:textColor">#fff</item>
+</style>
+<style name="windowFrame" >
+    <item name="android:background">#fff</item>
+ </style>
+
+
+
+
+
+
+
+
+
+
+
 </resources>
