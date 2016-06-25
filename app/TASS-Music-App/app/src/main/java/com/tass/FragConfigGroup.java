@@ -35,8 +35,8 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String groupName = txtGroupName.getText().toString();
-                 TassService.Instance(getContext()).create(groupName, callBack);
+            String groupName = txtGroupName.getText().toString();
+            TassService.Instance(getContext()).create(groupName, callBack, true);
             }
         });
 
@@ -44,17 +44,19 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String groupName = txtGroupName.getText().toString();
-                 TassService.Instance(getContext() ).join(groupName, callBack);
+            String groupName = txtGroupName.getText().toString();
+            TassService.Instance(getContext()).join(groupName, callBack, false);
             }
         });
     }
 
     @Override
-    public void joinSuccess(boolean success) {
+    public void sessionCallback(boolean success, boolean isCreator) {
         if (success) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragViewGroup fvg = new FragViewGroup();
+            fvg.IsCreator = isCreator;
             fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
             fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
             fragmentTransaction.commit();

@@ -22,7 +22,7 @@ public class TassService
     }
     public interface GroupCallback
     {
-        void joinSuccess(boolean success);
+        void sessionCallback(boolean success, boolean isCreator);
     }
 
     private static String _url;
@@ -51,18 +51,18 @@ public class TassService
 
     }
 
-    public void create(String groupName, GroupCallback cb)
+    public void create(String groupName, GroupCallback cb, boolean isCreator)
     {
-        authCall(groupName,"create/",cb,Request.Method.POST);
+        authCall(groupName,"create/",cb,Request.Method.POST, isCreator);
 
     }
 
-    public void join(String groupName, GroupCallback cb)
+    public void join(String groupName, GroupCallback cb, boolean isCreator)
     {
-        authCall(groupName,"join/", cb,Request.Method.GET);
+        authCall(groupName,"join/", cb,Request.Method.GET, isCreator);
     }
 
-    private void authCall(String groupName, String path,final GroupCallback cb, int method)
+    private void authCall(String groupName, String path, final GroupCallback cb, int method, final boolean isCreator)
     {
         GroupName = groupName;
         StringBuilder sb = new StringBuilder();
@@ -76,9 +76,9 @@ public class TassService
                     public void onResponse(String response) {
                         if (response.contains("-")) {
                             _guid = response;
-                            cb.joinSuccess(true);
+                            cb.sessionCallback(true, isCreator);
                         }else {
-                            cb.joinSuccess(false);
+                            cb.sessionCallback(false, isCreator);
                         }
                     }
                 },
@@ -86,7 +86,7 @@ public class TassService
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v("Service","ERR CREATING");
-                        cb.joinSuccess(false);
+                        cb.sessionCallback(false, isCreator);
                     }
                 });
         _queue.add(sr);
@@ -98,6 +98,7 @@ public class TassService
         {
             // not connected to a group
             Log.e("Service::", "NO GUID BEFORE TRYING TO ACCESS");
+            return;
         }
         StringBuilder sb = new StringBuilder();
         sb.append(_url);
