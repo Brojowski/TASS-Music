@@ -1,6 +1,4 @@
-package com.tass.Services;
-
-import java.util.ArrayList;
+package com.tass.services;
 
 
 public class QueueItem

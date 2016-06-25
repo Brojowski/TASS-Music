@@ -11,13 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.alex.tass_music_app.R;
+import com.tass.services.TassService;
 
 /**
  * Created by Tyler on 5/8/2016.
  */
-public class FragConfigGroup extends Fragment {
+public class FragConfigGroup extends Fragment implements TassService.GroupCallback {
 
     EditText txtGroupName = null;
+    private TassService.GroupCallback callBack = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -27,6 +29,7 @@ public class FragConfigGroup extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         txtGroupName = (EditText) view.findViewById(R.id.create_group_name);
+        callBack = this;
 
         Button btnCreate = (Button) view.findViewById(R.id.create_button);
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -35,15 +38,9 @@ public class FragConfigGroup extends Fragment {
                 String groupName = txtGroupName.getText().toString();
 
                 try {
-                    // TODO: Pass group name to services
-                    // create the shit
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
-                    fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
-                    fragmentTransaction.commit();
+                    TassService.Instance().create(groupName, callBack);
                 } catch (Exception ex) {
-                    // TODO: HANDLE ME (unique group name?)
+                    // tyurn off sninne\
                 }
             }
         });
@@ -55,18 +52,25 @@ public class FragConfigGroup extends Fragment {
                 String groupName = txtGroupName.getText().toString();
 
                 try {
-                    // TODO: Pass group name to services
-                    // join the shit
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
-                    fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
-                    fragmentTransaction.commit();
+                    TassService.Instance().join(groupName, callBack);
                 } catch (Exception ex) {
-                    // TODO: HANDLE ME (unique group name?)
+                    // hide spinner
                 }
             }
         });
+    }
+
+    @Override
+    public void joinSuccess(boolean success) {
+        if (success) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
+            fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+            fragmentTransaction.commit();
+        } else {
+             // tuyrn off sinenir
+        }
     }
 }
 
