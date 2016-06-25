@@ -10,6 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -125,7 +127,7 @@ public class TassService
         _queue.add(sr);
     }
 
-    public void getList(SongListCallback callback)
+    public void getList(final SongListCallback callback)
     {
         if (_guid == null)
         {
@@ -143,22 +145,46 @@ public class TassService
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Log.v("",response);
+                        callback.onSuccess(parseGroup(response));
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e("Service","Get list error.");
+                        callback.onError();
                     }
                 }
         );
         _queue.add(sr);
     }
 
-    private Group parseGroup(JSONObject response)
+    private Group parseGroup(String response)
     {
-        return null;
+        Group outGroup = new Group();
+
+        JSONArray jsonArr = null;
+        try {
+            jsonArr = new JSONArray(response);
+        }catch (JSONException e)
+        {}
+        if (jsonArr == null)
+        {
+            return outGroup;
+        }
+
+        for (int i = 0; i < jsonArr.length(); i++) {
+            try {
+                    JSONObject jsonObj = (JSONObject) jsonArr.get(i);
+                    String uri = jsonObj.getString("uri");
+                    int votes = jsonObj.getInt("votes");
+                    outGroup.AddItem(new QueueItem(uri,votes));
+            }catch (JSONException e)
+            {
+            }
+        }
+        return outGroup;
     }
 
     public void closeGroup()

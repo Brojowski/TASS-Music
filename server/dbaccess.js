@@ -86,19 +86,26 @@ module.exports =
         });
     },
     add: function (guid, uri, callback) {
-        connection.query("SELECT * FROM songs WHERE uri=?",[uri],function (err, rows) {
-            if (err)
+        connection.query("SELECT * FROM groups WHERE guid=?",[guid],function (err, rows) {
+            if (!rows.length > 0 || !rows[0].open)
             {
-                callback({err:"Database error"});
+                callback({err:"The group is closed"});
                 return;
             }
-            if (rows.length < 1)
-            {
-                //add to table
-                connection.query("INSERT INTO songs VALUES (?,1,?)",[guid,uri]);
-            }
-            connection.query("UPDATE songs SET votes = votes + 1 WHERE groupguid=?",[guid]);
-            callback({});
+            connection.query("SELECT * FROM songs WHERE uri=?",[uri],function (err, rows) {
+                if (err)
+                {
+                    callback({err:"Database error"});
+                    return;
+                }
+                if (rows.length < 1)
+                {
+                    //add to table
+                   connection.query("INSERT INTO songs VALUES (?,1,?)",[guid,uri]);
+                }
+                connection.query("UPDATE songs SET votes = votes + 1 WHERE groupguid=?",[guid]);
+                callback({});
+            });
         });
     },
     getNext: function (guid,callback) {
@@ -108,6 +115,7 @@ module.exports =
                 callback({err:"Database error"});
                 return;
             }
+            console.log(rows);
             callback({songs:rows});
         });
     },

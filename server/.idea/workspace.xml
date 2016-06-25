@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
+            <state relative-caret-position="324">
+              <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
               <folding>
                 <element signature="e#243#414#0" expanded="false" />
                 <element signature="e#463#683#0" expanded="false" />
@@ -37,19 +37,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbaccess.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dbaccess.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dbaccess.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="114" column="85" selection-start-line="114" selection-start-column="85" selection-end-line="114" selection-end-column="85" />
+            <state relative-caret-position="522">
+              <caret line="117" column="30" selection-start-line="117" selection-start-column="30" selection-end-line="117" selection-end-column="30" />
               <folding>
                 <element signature="e#0#38#0" expanded="false" />
                 <element signature="e#573#1270#0" expanded="false" />
                 <element signature="e#1313#1822#0" expanded="false" />
                 <element signature="e#1861#2340#0" expanded="false" />
-                <element signature="e#2382#2904#0" expanded="false" />
-                <element signature="e#2470#2896#0" expanded="false" />
-                <element signature="e#2944#3237#0" expanded="false" />
+                <element signature="e#2382#3220#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -67,8 +65,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dbaccess.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/dbaccess.js" />
       </list>
     </option>
   </component>
@@ -183,12 +181,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1466831820160</updated>
-      <workItem from="1466831822052" duration="18193000" />
+      <workItem from="1466831822052" duration="19743000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18193000" />
+    <option name="totallyTimeSpent" value="19743000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="280" width="1366" height="699" extended-state="6" />
@@ -223,32 +221,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dbaccess.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="114" column="85" selection-start-line="114" selection-start-column="85" selection-end-line="114" selection-end-column="85" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-            <element signature="e#573#1270#0" expanded="false" />
-            <element signature="e#1313#1822#0" expanded="false" />
-            <element signature="e#1861#2340#0" expanded="false" />
-            <element signature="e#2382#2904#0" expanded="false" />
-            <element signature="e#2470#2896#0" expanded="false" />
-            <element signature="e#2944#3237#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
+        <state relative-caret-position="324">
+          <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
           <folding>
             <element signature="e#243#414#0" expanded="false" />
             <element signature="e#463#683#0" expanded="false" />
             <element signature="e#1057#1278#0" expanded="false" />
             <element signature="e#1327#1556#0" expanded="false" />
             <element signature="e#1624#1714#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbaccess.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="117" column="30" selection-start-line="117" selection-start-column="30" selection-end-line="117" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+            <element signature="e#573#1270#0" expanded="false" />
+            <element signature="e#1313#1822#0" expanded="false" />
+            <element signature="e#1861#2340#0" expanded="false" />
+            <element signature="e#2382#3220#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -3,24 +3,19 @@ package com.tass.services;
 
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Group {
 
-    public String Name;
-    public String ID;
-    public boolean isOpen = false;
-    public String Current;
-    public String Next;
-    //public ArrayList<QueueItem> Queue;
+    private ArrayList<QueueItem> _queue;
 
-    protected Group()
+    public Group()
     {
-
+        _queue = new ArrayList<>();
     }
-    protected Group(String name, String ID, boolean isOpen)
+
+    public void AddItem(QueueItem qi)
     {
-        this.Name = name;
-        this.ID = ID;
-        this.isOpen = isOpen;
+        _queue.add(qi);
     }
 }

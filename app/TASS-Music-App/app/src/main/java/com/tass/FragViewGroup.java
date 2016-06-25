@@ -67,7 +67,8 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                         //This is the input I can't get text from
                         EditText editText = (EditText) f.findViewById(R.id.spotify_uri);
                         String spotifyUri = editText.getText().toString();
-                        TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
+                        //TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
+                        TassService.Instance(getContext()).getList(FragViewGroup.this);
                         dialog.cancel();
                     }
                 });
