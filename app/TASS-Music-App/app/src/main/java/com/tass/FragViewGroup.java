@@ -46,7 +46,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
 
-        String[] songs = new String[]{"Hello", "Take Me out", "take a walk"};
+        String[] songs = new String[]{"Hello", "Take Me out", "take a walk", "Take Me out", "take a walk"};
 
 
         QueueItem[] items = new QueueItem[5];
@@ -55,16 +55,23 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         }
 //
         ListView lView = (ListView) view.findViewById(R.id.viewGroupList);
-        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
+        //s_adapter = new ViewGroupCustomAdapter(view.getContext(), items);
         
 
 //        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
         lView.setAdapter(_adapter);
 
-        if (IsCreator) {
-            // enable the close button
-            // hook up the close button event
-        }
+        FloatingActionButton btnQuit = (FloatingActionButton) view.findViewById(R.id.btn_quit);
+        btnQuit.setOnClickListener((view) -> {
+                Dialog d = new Dialog(view.getContext(), R.style.darkDialog);
+            super.onDetach();
+            if (IsCreator) {
+                // If the group creator is leaving the fragment then we want the group to close
+                TassService.Instance(getContext()).closeGroup();
+            }
+
+
+        });
 
         FloatingActionButton btnAddSong = (FloatingActionButton) view.findViewById(R.id.btn_add_song);
         btnAddSong.setOnClickListener(new View.OnClickListener() {
