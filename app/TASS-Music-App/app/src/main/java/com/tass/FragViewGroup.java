@@ -18,7 +18,10 @@ import android.widget.Toast;
 import com.example.alex.tass_music_app.R;
 import com.tass.controls.ViewGroupCustomAdapter;
 import com.tass.services.Group;
+import com.tass.services.QueueItem;
 import com.tass.services.TassService;
+
+import java.util.ArrayList;
 
 /**
  * Created by Sean on 6/25/2016.
@@ -40,10 +43,22 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
         String[] songs = new String[]{"Hello", "Take Me out", "take a walk"};
+
+
+        QueueItem[] items = new QueueItem[5];
+        for (int i = 0; i < items.length; i++) {
+            items[i] = new QueueItem("0", 0);
+        }
+//
         ListView lView = (ListView) view.findViewById(R.id.viewGroupList);
-        _adapter = new ViewGroupCustomAdapter(view.getContext(), songs);
+        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
+        
+
+//        _adapter = new ViewGroupCustomAdapter(view.getContext(), items);
         lView.setAdapter(_adapter);
+
         if (IsCreator) {
             // enable the close button
             // hook up the close button event
@@ -86,7 +101,6 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     @Override
     public void onSuccess(Group group)
     {
-     //   _adapter.
     }
 
     @Override
@@ -94,5 +108,14 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     {
         //TODO: Need to do something better.
         Toast.makeText(getContext(),"Could not load the songs from the group.", Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (IsCreator) {
+            // If the group creator is leaving the fragment then we want the group to close
+            TassService.Instance(getContext()).closeGroup();
+        }
     }
 }

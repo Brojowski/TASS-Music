@@ -1,5 +1,6 @@
 package com.tass;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -48,6 +50,8 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
             TassService.Instance(getContext()).join(groupName, callBack, false);
             }
         });
+
+
     }
 
     @Override
@@ -64,5 +68,6 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
              // tuyrn off sinenir
         }
     }
+
 }
 
