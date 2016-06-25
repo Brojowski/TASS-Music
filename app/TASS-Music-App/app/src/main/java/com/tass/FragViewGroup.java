@@ -61,12 +61,11 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                 final View inflator = linf.inflate(R.layout.dialog_add_song, null);
                 String Message = "Are you sure you want to quit?";
                 String Title = "Leave Party";
-                if(IsCreator)
-                {
+                if (IsCreator) {
                     Title = "Destroy Group";
                     Message = "Leaving the group will disband the party and kick everyone out. \r\n Are you sure you want to quit?";
-                    MyObserver observer = new MyObserver(getContext());
-                    observer.PlayFirstSong();
+//                    MyObserver observer = new MyObserver(getContext());
+//                    observer.PlayFirstSong();
                 }
 
                 builder.setMessage(Message).setTitle(Title);
@@ -139,12 +138,32 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     @Override
     public void onSuccess(Group group)
     {
-        ArrayList<QueueItem> songQueue = group.getSongQueue();
+//        ArrayList<QueueItem> songQueue = group.getSongQueue();
         ArrayList<String> displayArray = new ArrayList<String>();
-        for (int i = 0; i < songQueue.size(); i++) {
-            displayArray.add(songQueue.get(i).getTitle() + ";" + songQueue.get(i).getAuthor());
-        }
+//        for (int i = 0; i < songQueue.size(); i++) {
+//            displayArray.add(songQueue.get(i).getTitle() + ";" + songQueue.get(i).getAuthor());
+
         ListView yourListView = (ListView) getView().findViewById(R.id.viewGroupList);
+
+        displayArray.add("One Dance;Drake, Wiz Kid, Kyla");
+        displayArray.add("Panda;Desiigner");
+        displayArray.add("Needed Me;Rihanna");
+        displayArray.add("Too Good;Drake, Rihanna");
+        displayArray.add("Controlla;Drake");
+        displayArray.add("Don't Mind;Kent Jones");
+        displayArray.add("Ride;Twenty One Pilots");
+        displayArray.add("Heathens;Twenty One Pilots");
+        displayArray.add("Pop Style;Drake");
+        displayArray.add("Into You;Ariana Grande");
+        displayArray.add("Gold;Kiiara");
+        displayArray.add("Close;Nick Jonas, Tove Lo");
+        displayArray.add("Low Life;Future, The Weekend");
+        displayArray.add("Middle;DJ Snake, Bipolar Sunshine");
+
+
+
+
+
         ListAdapter customAdapter = new ListAdapter(yourListView.getContext(), R.layout.view_adapter_layout, displayArray);
         yourListView.setAdapter(customAdapter);
     }

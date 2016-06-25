@@ -8,6 +8,6 @@ import android.content.Context;
 public class SpotifyService {
 
     public static String Token;
-    public static final String ClientID = "3d4e3f44e5b64ab8b2f651de53b2226d";
+    public static final String ClientID = "0fb51cbbde9149e388670a3a501f93bc";
 
 }

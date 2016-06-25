@@ -86,12 +86,6 @@ module.exports =
         });
     },
     add: function (guid, uri, callback) {
-        connection.query("SELECT * FROM groups WHERE guid=?",[guid],function (err, rows) {
-            if (!rows.length > 0 || !rows[0].open)
-            {
-                callback({err:"The group is closed"});
-                return;
-            }
             connection.query("SELECT * FROM songs WHERE uri=?",[uri],function (err, rows) {
                 if (err)
                 {
@@ -106,7 +100,6 @@ module.exports =
                 connection.query("UPDATE songs SET votes = votes + 1 WHERE groupguid=?",[guid]);
                 callback({});
             });
-        });
     },
     getNext: function (guid,callback) {
         connection.query("SELECT * FROM songs WHERE groupguid=? ORDER BY votes DESC",[guid],function (err, rows) {

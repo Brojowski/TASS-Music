@@ -92,14 +92,7 @@ public class NavActivity extends AppCompatActivity implements CreateGroupInterfa
                 case TOKEN:
                     // Handle successful response
                     SpotifyService.Token = response.getAccessToken();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    FragViewGroup.IsCreator = true;
-                    FragViewGroup fvg = new FragViewGroup();
-                    fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
-                    fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
-                    fragmentTransaction.commit();
-                    // TassService.Instance(this).create(groupName, this, true);
+                    TassService.Instance(this).create(groupName, this, true);
                     break;
 
                 // Auth flow returned an error

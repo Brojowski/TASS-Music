@@ -44,7 +44,7 @@ public class ListAdapter extends ArrayAdapter<String> {
             TextView txtTitle = (TextView) v.findViewById(R.id.songTitle);
             TextView txtArtist = (TextView) v.findViewById(R.id.songArtist);
 
-            txtTitle.setText(split[0].substring(16));
+            txtTitle.setText(split[0]);
             txtArtist.setText(split[1]);
         }
 

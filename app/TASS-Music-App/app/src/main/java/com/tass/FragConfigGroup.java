@@ -45,7 +45,9 @@ public class FragConfigGroup extends Fragment{
             @Override
             public void onClick(View view) {
                 String groupName = txtGroupName.getText().toString();
-                _listener.tryLoginToSpotify(groupName);
+//                _listener.tryLoginToSpotify(groupName);
+                TassService.Instance(getContext()).create(groupName, (TassService.GroupCallback)_listener, false);
+
             }
         });
 
