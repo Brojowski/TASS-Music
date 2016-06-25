@@ -2,6 +2,8 @@ package com.tass;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +29,20 @@ public class FragCreateGroup extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         Button btnGroupConnect = (Button) view.findViewById(R.id.create_button);
+        txtGroupName = (EditText) view.findViewById(R.id.create_group_name);
         btnGroupConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtGroupName = (EditText) view.findViewById(R.id.create_group_name);
                 String groupName = txtGroupName.getText().toString();
 
                 try {
                     // TODO: Pass group name to services
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
+                    fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+                    fragmentTransaction.commit();
                 } catch (Exception ex) {
                     // TODO: HANDLE ME (unique group name?)
                 }
