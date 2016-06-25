@@ -76,7 +76,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                 LayoutInflater linf = LayoutInflater.from(view.getContext());
                 final View inflator = linf.inflate(R.layout.dialog_add_song, null);
 
-                builder.setView(linf.inflate(R.layout.dialog_add_song, null));
+                
                 builder.setMessage("Are you sure you want to quit?").setTitle("Leave Party");
                 builder.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
