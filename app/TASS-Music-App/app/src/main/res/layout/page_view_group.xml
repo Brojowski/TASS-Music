@@ -9,6 +9,18 @@
         android:id="@+id/viewGroupList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="16dp"
+        android:id="@+id/btn_quit"
+        app:fabSize="normal"
+        android:src="@drawable/ic_quit"
+        app:layout_anchor="@id/viewGroupList"
+        app:layout_anchorGravity="bottom|left|end"
+        app:rippleColor="@android:color/white" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -19,6 +31,8 @@
         app:fabSize="normal"
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/viewGroupList"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        app:rippleColor="@android:color/white" />
+
 
 </android.support.design.widget.CoordinatorLayout>
