@@ -46,8 +46,14 @@ public class FragConfigGroup extends Fragment{
             public void onClick(View view) {
                 String groupName = txtGroupName.getText().toString();
 //                _listener.tryLoginToSpotify(groupName);
-                TassService.Instance(getContext()).create(groupName, (TassService.GroupCallback)_listener, false);
-
+//                TassService.Instance(getContext()).create(groupName, (TassService.GroupCallback)_listener, false);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                FragViewGroup.IsCreator = true;
+                FragViewGroup fvg = new FragViewGroup();
+                fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
+                fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+                fragmentTransaction.commit();
             }
         });
 
@@ -56,7 +62,14 @@ public class FragConfigGroup extends Fragment{
             @Override
             public void onClick(View view) {
             String groupName = txtGroupName.getText().toString();
-            TassService.Instance(getContext()).join(groupName, (TassService.GroupCallback)_listener, false);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                FragViewGroup.IsCreator = false;
+                FragViewGroup fvg = new FragViewGroup();
+                fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
+                fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+                fragmentTransaction.commit();
+//            TassService.Instance(getContext()).join(groupName, (TassService.GroupCallback)_listener, false);
             }
         });
 

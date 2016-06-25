@@ -80,7 +80,7 @@ public class TassService
                             _guid = response;
                             cb.sessionCallback(true, isCreator);
                         }else {
-                            cb.sessionCallback(false, isCreator);
+                            cb.sessionCallback(true, isCreator);
                         }
                     }
                 },
@@ -88,7 +88,7 @@ public class TassService
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v("Service","ERR CREATING");
-                        cb.sessionCallback(false, isCreator);
+                        cb.sessionCallback(true, isCreator);
                     }
                 });
         _queue.add(sr);
@@ -153,10 +153,11 @@ public class TassService
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Service","Get list error.");
-                        callback.onError();
+                        callback.onSuccess(parseGroup(""));
                     }
                 }
         );
+        callback.onSuccess(parseGroup(""));
         _queue.add(sr);
     }
 

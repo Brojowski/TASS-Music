@@ -119,8 +119,8 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                         //This is the input I can't get text from
                         EditText editText = (EditText) f.findViewById(R.id.spotify_uri);
                         String spotifyUri = editText.getText().toString();
-                        TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
-                        TassService.Instance(getContext()).getList(FragViewGroup.this);
+                        //TassService.Instance(getContext()).addOrVoteSong(spotifyUri);
+                        //TassService.Instance(getContext()).getList(FragViewGroup.this);
                         dialog.cancel();
                     }
                 });
@@ -142,28 +142,26 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         ArrayList<String> displayArray = new ArrayList<String>();
 //        for (int i = 0; i < songQueue.size(); i++) {
 //            displayArray.add(songQueue.get(i).getTitle() + ";" + songQueue.get(i).getAuthor());
-
-        ListView yourListView = (ListView) getView().findViewById(R.id.viewGroupList);
-
-        displayArray.add("One Dance;Drake, Wiz Kid, Kyla");
-        displayArray.add("Panda;Desiigner");
-        displayArray.add("Needed Me;Rihanna");
-        displayArray.add("Too Good;Drake, Rihanna");
-        displayArray.add("Controlla;Drake");
-        displayArray.add("Don't Mind;Kent Jones");
-        displayArray.add("Ride;Twenty One Pilots");
-        displayArray.add("Heathens;Twenty One Pilots");
-        displayArray.add("Pop Style;Drake");
-        displayArray.add("Into You;Ariana Grande");
-        displayArray.add("Gold;Kiiara");
+        if (IsCreator) {
+            displayArray.add("One Dance;Drake, Wiz Kid, Kyla");
+            displayArray.add("Panda;Desiigner");
+            displayArray.add("Needed Me;Rihanna");
+            displayArray.add("Too Good;Drake, Rihanna");
+            displayArray.add("Controlla;Drake");
+            displayArray.add("Don't Mind;Kent Jones");
+            displayArray.add("Ride;Twenty One Pilots");
+            displayArray.add("Heathens;Twenty One Pilots");
+            displayArray.add("Pop Style;Drake");
+            displayArray.add("Into You;Ariana Grande");
+            displayArray.add("Gold;Kiiara");
+            displayArray.add("Close;Nick Jonas, Tove Lo");
+        }
         displayArray.add("Close;Nick Jonas, Tove Lo");
         displayArray.add("Low Life;Future, The Weekend");
         displayArray.add("Middle;DJ Snake, Bipolar Sunshine");
 
 
-
-
-
+        ListView yourListView = (ListView) getView().findViewById(R.id.viewGroupList);
         ListAdapter customAdapter = new ListAdapter(yourListView.getContext(), R.layout.view_adapter_layout, displayArray);
         yourListView.setAdapter(customAdapter);
     }
@@ -172,7 +170,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
     public void onError()
     {
         //TODO: Need to do something better.
-        Toast.makeText(getContext(),"Could not load the songsfor this group", Toast.LENGTH_SHORT);
+        //Toast.makeText(getContext(),"Could not load the songsfor this group", Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -180,7 +178,7 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
         super.onDetach();
         if (IsCreator) {
             // If the group creator is leaving the fragment then we want the group to close
-            TassService.Instance(getContext()).closeGroup();
+            // TassService.Instance(getContext()).closeGroup();
             IsCreator = false;
         }
     }
