@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" android:background="#333">
+
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+
+        >
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +28,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Song Title"
                 android:id="@+id/songName"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp" android:textColor="#fff"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,16 +37,22 @@
                 android:text="Song Artist"
                 android:textSize="12dp"
                 android:id="@+id/artistName"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp" android:textColor="#fff"/>
+
         </LinearLayout>
 
         <Button
+            android:id="@+id/upVoteButton"
+            android:layout_width="2dp"
+            />
+
+        <android.support.design.widget.VisibilityAwareImageButton
+            android:src="@drawable/ic_thumb"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:text="^"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="12dp"
 
-            android:id="@+id/upVoteButton" />
+
+            />
+
     </TableRow>
 </LinearLayout>
