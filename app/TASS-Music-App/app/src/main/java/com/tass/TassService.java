@@ -1,36 +1,58 @@
 package com.tass;
 
 import android.content.Context;
+import android.net.Uri;
+
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.android.volley.Cache;
+import com.android.volley.Network;
 
-/**
- * Created by alex on 6/24/16.
- */
+
 public class TassService
 {
-    public enum Paths
+    private static String _url;
+    private static int _port;
+    private static String _uri;
+    private RequestQueue _queue;
+    // Instantiate the cache
+    private Cache _cache;
+
+    // Set up the network to use HttpURLConnection as the HTTP client.
+    private Network _network;
+
+    private static TassService instance;
+    public static TassService Instance()
     {
-        Test;
-        private static final String BASEURL = "http://10.70.10.32:8080";
-        public String buildURL() throws Exception
+        if(instance == null)
         {
-            String path = null;
-            switch (this)
-            {
-                case Test:
-                    path = "";
-                    break;
-            }
-            return BASEURL + path;
+            instance = new TassService();
         }
+        return instance;
     }
 
-    public static void MakeRequest(int requestMethod,Paths path, Context c, Response.Listener<String> onSuccess, Response.ErrorListener onError)
-            throws Exception
+    private TassService()
     {
-        StringRequest request = new StringRequest(requestMethod, path.buildURL(), onSuccess, onError);
-        Volley.newRequestQueue(c).add(request);
+        _url = "https://10.70.10.32";
+        _port = 8080;
+        _uri = "http://10.70.10.32:8080/";
+        _queue = new RequestQueue(_cache, _network);
+
     }
+
+    public Group Join(String name)
+    {
+        Group g = new Group();
+
+        return g;
+    }
+    public Group Create(String name)
+    {
+        // route /create/:name
+        Group g = new Group();
+        return g;
+    }
+
 }
