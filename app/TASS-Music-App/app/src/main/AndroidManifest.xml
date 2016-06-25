@@ -9,7 +9,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name=".TASS_Service" />
+
         <activity android:name=".Main">
+
+        </activity>
+        <activity
+            android:name="com.android.NavActivity"
+            android:label="@string/title_activity_nav"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
