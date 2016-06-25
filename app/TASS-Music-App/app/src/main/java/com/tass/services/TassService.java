@@ -27,13 +27,15 @@ public class TassService
 
     private static String _url;
     private static Context context;
-    private RequestQueue _queue;
+    private static RequestQueue _queue;
 
     private String _guid = null;
 
     private static TassService instance;
-    public static TassService Instance()
-    {
+    public static TassService Instance(Context c)
+    { 
+        context = c;
+        _queue = Volley.newRequestQueue(context);
         if(instance == null)
         {
             instance = new TassService();
@@ -41,44 +43,41 @@ public class TassService
         return instance;
     }
 
-    public static void setContext(Context c)
-    {
-        context = c;
-    }
 
     private TassService()
     {
         _url = "http://10.70.10.32:8080/";
-        _queue = Volley.newRequestQueue(context);
+
     }
 
     public void create(String groupName, GroupCallback cb)
     {
-        authCall(groupName,"create/",cb);
+        authCall(groupName,"create/",cb,Request.Method.POST);
 
     }
 
     public void join(String groupName, GroupCallback cb)
     {
-        authCall(groupName,"join/", cb);
+        authCall(groupName,"join/", cb,Request.Method.GET);
     }
 
-    private void authCall(String groupName, String path,final GroupCallback cb)
+    private void authCall(String groupName, String path,final GroupCallback cb, int method)
     {
         StringBuilder sb = new StringBuilder();
         sb.append(_url);
         sb.append(path);
         sb.append(groupName);
-        StringRequest sr = new StringRequest(Request.Method.GET,
+        StringRequest sr = new StringRequest(method,
                 sb.toString(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response.matches("[a-f0-9]{8}-[a-f0-9]{4}-4[0-9]{3}-[89ab][a-f0-9]{3}-[0-9a-f]{12}")) {
+                        if (response.contains("-")) {
                             _guid = response;
                             cb.joinSuccess(true);
+                        }else {
+                            cb.joinSuccess(false);
                         }
-                        cb.joinSuccess(false);
                     }
                 },
                 new Response.ErrorListener() {
@@ -96,7 +95,31 @@ public class TassService
         if (_guid == null)
         {
             // not connected to a group
+            Log.e("Service::", "NO GUID BEFORE TRYING TO ACCESS");
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(_url);
+        sb.append("group/");
+        sb.append(_guid);
+        sb.append("/add/");
+        sb.append(songId);
+        StringRequest sr = new StringRequest(
+                Request.Method.POST,
+                sb.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        _queue.add(sr);
     }
 
     public void getNext(SongListCallback callback)
@@ -104,6 +127,7 @@ public class TassService
         if (_guid == null)
         {
             // not connected to a group
+            Log.e("Service::", "NO GUID BEFORE TRYING TO ACCESS");
         }
     }
 
@@ -117,7 +141,28 @@ public class TassService
         if (_guid == null)
         {
             // not connected to a group
+            Log.e("Service::", "NO GUID BEFORE TRYING TO ACCESS");
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(_url);
+        sb.append("close/");
+        sb.append(_guid);
+        StringRequest sr = new StringRequest(
+                Request.Method.GET,
+                sb.toString(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
     }
 
 }

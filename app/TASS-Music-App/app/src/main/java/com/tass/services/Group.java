@@ -11,7 +11,7 @@ public class Group {
     public boolean isOpen = false;
     public String Current;
     public String Next;
-    public ArrayList<QueueItem> Queue;
+    //public ArrayList<QueueItem> Queue;
 
     protected Group()
     {

@@ -36,12 +36,7 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
             @Override
             public void onClick(View view) {
                 String groupName = txtGroupName.getText().toString();
-
-                try {
-                    TassService.Instance().create(groupName, callBack);
-                } catch (Exception ex) {
-                    // tyurn off sninne\
-                }
+                 TassService.Instance(getContext()).create(groupName, callBack);
             }
         });
 
@@ -50,12 +45,7 @@ public class FragConfigGroup extends Fragment implements TassService.GroupCallba
             @Override
             public void onClick(View view) {
                 String groupName = txtGroupName.getText().toString();
-
-                try {
-                    TassService.Instance().join(groupName, callBack);
-                } catch (Exception ex) {
-                    // hide spinner
-                }
+                 TassService.Instance(getContext() ).join(groupName, callBack);
             }
         });
     }
