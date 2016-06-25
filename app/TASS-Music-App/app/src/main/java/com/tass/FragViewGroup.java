@@ -1,17 +1,14 @@
 package com.tass;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.alex.tass_music_app.R;
+import com.tass.controls.ViewGroupCustomAdapter;
 
 /**
  * Created by Sean on 6/25/2016.
