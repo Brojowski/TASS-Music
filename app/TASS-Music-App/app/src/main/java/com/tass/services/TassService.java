@@ -216,4 +216,32 @@ public class TassService
         );
     }
 
+    public void removeTrack(String id) {
+        if (_guid == null)
+        {
+            // not connected to a group
+            Log.e("Service::", "NO GUID BEFORE TRYING TO ACCESS");
+        }
+            StringBuilder sb = new StringBuilder();
+            sb.append(_url);
+            sb.append("group/");
+            sb.append(_guid);
+            sb.append("/remove/");
+            sb.append(id);
+            StringRequest sr = new StringRequest(
+            Request.Method.DELETE,
+            sb.toString(),
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+    }
 }

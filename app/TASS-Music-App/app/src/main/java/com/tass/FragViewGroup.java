@@ -18,9 +18,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.alex.tass_music_app.R;
+import com.spotify.sdk.android.player.Config;
+import com.spotify.sdk.android.player.Player;
+import com.spotify.sdk.android.player.Spotify;
 import com.tass.controls.ListAdapter;
 import com.tass.services.Group;
+import com.tass.services.MyAudioController;
+import com.tass.services.MyObserver;
 import com.tass.services.QueueItem;
+import com.tass.services.SpotifyService;
 import com.tass.services.TassService;
 
 import java.util.ArrayList;
@@ -59,7 +65,8 @@ public class FragViewGroup extends Fragment implements TassService.SongListCallb
                 {
                     Title = "Destroy Group";
                     Message = "Leaving the group will disband the party and kick everyone out. \r\n Are you sure you want to quit?";
-
+                    MyObserver observer = new MyObserver(getContext());
+                    observer.PlayFirstSong();
                 }
 
                 builder.setMessage(Message).setTitle(Title);
