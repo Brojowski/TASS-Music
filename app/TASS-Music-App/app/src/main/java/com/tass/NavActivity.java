@@ -27,6 +27,8 @@ import com.example.alex.tass_music_app.R;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
+import com.spotify.sdk.android.player.Spotify;
+import com.tass.services.SpotifyService;
 import com.tass.services.TassService;
 
 public class NavActivity extends AppCompatActivity implements CreateGroupInterface,TassService.GroupCallback {
@@ -89,8 +91,15 @@ public class NavActivity extends AppCompatActivity implements CreateGroupInterfa
                 // Response was successful and contains auth token
                 case TOKEN:
                     // Handle successful response
-                    String token = response.getAccessToken();
-                    TassService.Instance(this).create(groupName, this, true);
+                    SpotifyService.Token = response.getAccessToken();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    FragViewGroup.IsCreator = true;
+                    FragViewGroup fvg = new FragViewGroup();
+                    fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
+                    fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
+                    fragmentTransaction.commit();
+                    // TassService.Instance(this).create(groupName, this, true);
                     break;
 
                 // Auth flow returned an error
@@ -108,9 +117,7 @@ public class NavActivity extends AppCompatActivity implements CreateGroupInterfa
     @Override
     public void tryLoginToSpotify(String groupname)
     {
-        String CLIENT_ID = "3d4e3f44e5b64ab8b2f651de53b2226d";
-
-        final AuthenticationRequest request = new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, "www.google.com")
+        final AuthenticationRequest request = new AuthenticationRequest.Builder(SpotifyService.ClientID, AuthenticationResponse.Type.TOKEN, "www.google.com")
                 .setScopes(new String[]{"user-read-private", "playlist-read", "playlist-read-private", "streaming"})
                 .build();
 
@@ -122,8 +129,8 @@ public class NavActivity extends AppCompatActivity implements CreateGroupInterfa
         if (success) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragViewGroup.IsCreator = isCreator;
             FragViewGroup fvg = new FragViewGroup();
-            fvg.IsCreator = isCreator;
             fragmentTransaction.replace(R.id.app_content, new FragViewGroup());
             fragmentTransaction.addToBackStack(null); // this may not be needed depending on how we want state preserved
             fragmentTransaction.commit();
